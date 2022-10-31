@@ -1,0 +1,24 @@
+-- Cleaning Data in SQL queries
+
+Select * from Portfolio_Project_2.dbo.NashvilleHousing
+
+-- Standerdize Date Fomat
+
+Select SaleDate from Portfolio_Project_2.dbo.NashvilleHousing
+
+Select SaleDate, convert(date,saledate) from Portfolio_Project_2.dbo.NashvilleHousing
+
+update NashvilleHousing
+SET saledate = convert(date,saledate) 
+
+--Populate proprty address data
+
+Select * from Portfolio_Project_2.dbo.NashvilleHousing
+--where PropertyAddress is null
+order by ParcelID
+
+Select a.parcelID,a.propertyaddress,b.ParcelID,b.propertyaddress
+from Portfolio_Project_2.dbo.NashvilleHousing a
+join Portfolio_Project_2.dbo.NashvilleHousing b on a.ParcelID = b.ParcelID
+and a.uniqueid<> b.uniqueid
+where a.propertyaddress is null
